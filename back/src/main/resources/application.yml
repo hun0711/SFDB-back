@@ -12,12 +12,13 @@ spring:
         smtp:
           auth: true
           starttls:
-            enable: true
-  datasource:
-    url: jdbc:mysql://localhost:3306/sfdb?useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 1567
-    driver-class-name: com.mysql.cj.jdbc.Driver
+            enable: true           
+  spring:
+    datasource:
+     url: jdbc:mysql://sfdb.mysql.database.azure.com:3306/sfdb?useSSL=true
+     username: caraxxx13
+     password: 075471aa1!
+     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   type-aliases-package: com.back.*.repository
