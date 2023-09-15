@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.user.repository.RegisterDao">
+
+<!-- id 중복확인 -->
+<select id="idCheck" parameterType="java.lang.String" resultType="java.lang.Boolean">
+  SELECT COUNT(*) > 0 FROM user WHERE userId = #{userId}
+</select>
+
+<!-- 회원가입 -->
+<insert id="userJoin" parameterType="java.util.HashMap">
+INSERT into user(
+  userId,
+  userPw,
+  userName,
+  userBirth,
+  userEmail,
+  userProfileImage
+)VALUES(
+#{userId},
+#{userPw},
+#{userName},
+#{userBirth},
+#{userEmail},
+#{userProfileImage}
+)
+</insert>
+
+<delete id="withdraw" parameterType="UserDto">
+DELETE FROM user
+ WHERE userId = #{userId}
+</delete>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.user.repository.LoginDao">
+	
+	<!-- 로그인 -->
+	  <select id="findEncryptedPasswordByUserId" parameterType="String" resultType="String">
+    SELECT userPw FROM user WHERE userId = #{userId}
+</select>
+
+
+<!-- 로그인 후 회원 정보  -->
+	 <select id="userInfo" parameterType="String" resultType="UserDto">
+	 SELECT * FROM user WHERE userId = #{userId}
+	 </select>   
+	    
+	    
+	<!-- 구글 회원 여부 -->
+	<select id="findByGoogleId" resultType="UserDto">
+	  SELECT userId, userName , userEmail , userBirth , userProfileImage
+	  FROM user
+	  WHERE userId = #{googleId}
+	</select>
+	
+	 <!-- 네이버 회원 여부 -->
+	    <select id="findByNaverId" resultType="UserDto">
+	        SELECT userId, userName, userEmail, userBirth, userProfileImage
+	        FROM user
+	        WHERE userId = #{naverId}
+	    </select>
+	
+	<!-- 카카오 회원 여부 -->
+	<select id="findByKakaoId" resultType="UserDto">
+	    SELECT userId, userName, userEmail, userBirth, userProfileImage
+	    FROM user
+	    WHERE userId = #{kakaoId}
+	</select>    
+
+</mapper>

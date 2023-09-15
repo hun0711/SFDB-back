@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.movie.repository.MovieDao">
+
+
+
+<!-- 영화 정보 조회 (Top20 , 추천) -->
+  <select id="movieList" resultType="MovieDto">
+  select *
+  from movies
+  </select>
+
+
+   
+<!-- 영화 정보 조건 검색 -->   
+     <select id="selectMovie" parameterType="MovieDto" resultType="MovieDto">
+  select *
+  from movies
+  </select>
+   
+
+   
+<!-- 영화 정보 상세보기 -->   
+     <select id="movieDetail" parameterType="MovieDto" resultType="MovieDto">
+  select *
+  from movies
+<where>
+<if test='movieId!=null'>
+and movieId = #{movieId}
+</if>
+  <if test='movieSeq!=null'> 
+    and movieSeq = #{movieSeq}
+    </if>
+     </where>
+  </select>
+
+
+<!-- Top 20 영화  -->
+<select id="top20SfMovie" resultType="Top20SfMovieDto">
+select *
+from top20sfmovies
+order by top20sfmovieNo asc
+</select>
+
+
+
+
+<!--   추천 영화   -->
+<select id="recommendMovie" resultType="RecommendMovieDto">
+select *
+from recommendmovies
+order by recommendmovieNo asc
+</select>
+
+<!--  박스오피스 순위 -->
+<select id="todayBoxofficeRank" resultType="BoxOfficeDto">
+select *
+from boxoffice
+order by boxofficeRank asc
+</select>
+
+  
+<!-- 박스오피스 상세보기 -->   
+     <select id="boxofficeDetail" parameterType="BoxOfficeDto" resultType="BoxOfficeDto">
+  select *
+  from boxoffice
+<where>
+<if test='movieId!=null'>
+and movieId = #{movieId}
+</if>
+  <if test='movieSeq!=null'> 
+    and movieSeq = #{movieSeq}
+    </if>
+     </where>
+  </select>
+
+
+<!-- 개봉 예정 영화  -->
+<select id="releaseSoonMovie" resultType="ReleaseSoonMovieDto">
+select *
+from releasesoonmovies
+</select>
+
+<!-- OTT 유무  -->
+<select id="ottExistance" parameterType="OttExistanceDto" resultType="OttExistanceDto">
+select *
+from ott_existance
+<where>
+<if test='movieSeq!=null'>
+and movieSeq = #{movieSeq}
+</if>
+</where>
+</select>
+
+<!-- 감독 정보 -->
+<select id="directorsInfo" parameterType="MovieDirectorsDto" resultType="MovieDirectorsDto">
+select *
+from moviedirectors
+<where>
+<if test='directorId!=null'>
+and directorId = #{directorId}
+</if>
+<if test='directorNm!=null'>
+or directorNm = #{directorNm}
+</if>
+</where>
+</select>
+
+
+<!-- 배우 정보  -->
+<select id="actorsInfo" parameterType="MovieActorsDto" resultType="MovieActorsDto">
+select *
+from movieactors
+<where>
+<if test='actorNm!=null'>
+and actorNm = #{actorNm}
+</if>
+</where>
+</select>
+
+<!-- 감독 이미지 -->
+<select id="directorImage" parameterType="MovieDirectorsDto" resultType="MovieDirectorsDto">
+select imageUrl
+  from moviedirectors
+ where directorNm = #{directorNm}
+</select>
+
+<!-- 배우 이미지 -->
+<select id="actorImage" parameterType="MovieActorsDto" resultType="MovieActorsDto">
+select imageUrl
+  from movieactors
+ where actorNm = #{actorNm}
+</select>
+
+</mapper>
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="consoleAppender"/>
+    </root>
+    
+     <logger name="org.springframework" level="info" />
+    <logger name="org.mybatis.spring" level="info" />
+    <logger name="com.back.user.repository.RegisterDao" level="debug" />
+    <logger name="com.back.user.repository.LoginDao" level="debug" />
+</configuration>

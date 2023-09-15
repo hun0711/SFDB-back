@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 이하 생략 -->
+     <style>
+        .mail-container {
+            background-color: #f3f3f3;
+            padding: 20px;
+        }
+        .poster-style{
+        width:'100%';
+        height:auto;
+        margin-top:'20px';
+        margin-bottom:'20px';
+       }
+        .mail-title {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+      }
+        .mail-content {
+            color: #555555;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div style="margin:50px;">
+    <h1 style="font-size:25px"> 안녕하세요, SFDB 입니다.</h1>
+    <h1 style="font-size:22px"> 회원님이 알림 설정 하신 영화가 개봉했어요!</h1>
+</div>
+    <div class="mail-container">
+        <h1 class="mail-title">영화 개봉 알림</h1>
+        <img src="{{posterUrls}}" class="poster-style" alt="포스터 이미지">
+        <p class="mail-content">
+            {{title}}<br>
+            {{actorNms}}<br>
+            {{plotText}}
+ </p>
+</body>
+</html>

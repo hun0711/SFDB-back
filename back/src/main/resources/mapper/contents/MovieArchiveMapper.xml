@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.contents.repository.ArchiveDao">
+
+   <!-- 유저 보관함 존재유무 -->
+    <select id='checkMovieArchive' resultType="MovieArchiveDto" parameterType="MovieArchiveDto">
+    select *
+    from moviearchive
+    <where>
+<if test='movieId!=null'>
+and movieId = #{movieId}
+</if>
+  <if test='movieSeq!=null'> 
+    and movieSeq = #{movieSeq}
+    </if>
+    <if test='userId!=null'>
+    and userId = #{userId}
+    </if>
+</where>
+</select>
+
+   <!-- 유저 보관함 전체조회 -->
+    <select id='getUserArchive' resultType="MovieArchiveDto" parameterType="MovieArchiveDto">
+    select *
+    from moviearchive
+    <where>
+  <if test='userId!=null'> 
+    and userId = #{userId}
+    </if>
+</where>
+</select>
+
+<!-- 보관함 추가 -->
+<insert id="addToArchive" parameterType="MovieArchiveDto">
+  INSERT INTO moviearchive (movieId, movieSeq, title, titleOrg, userId, addDate)
+  VALUES (#{movieId}, #{movieSeq}, #{title}, #{titleOrg}, #{userId}, #{addDate})
+</insert>
+
+
+<!-- 보관함 삭제 -->
+<delete id='deleteToArchive' parameterType="MovieArchiveDto">
+  DELETE FROM moviearchive
+        <where>
+<if test='movieId!=null'>
+and movieId = #{movieId}
+</if>
+  <if test='movieSeq!=null'> 
+    and movieSeq = #{movieSeq}
+    </if>
+    <if test='userId!=null'>
+    and userId = #{userId}
+    </if>
+</where>
+</delete>
+
+</mapper>

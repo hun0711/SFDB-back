@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.user.repository.EmailDao">
+
+<select id="existReleaseNoticeEmailUser" parameterType='java.lang.String' resultType='java.lang.Boolean'>
+SELECT COUNT(*) > 0 FROM noticeemailusers WHERE userId = #{userId}
+</select>
+
+<insert id='releaseNoticeEmail' parameterType='Map'>
+INSERT into noticeemailusers(
+  title,
+  userId,
+  userEmail,
+  repRlsDate
+  )VALUES(
+  #{title},
+  #{userId},
+  #{userEmail},
+  #{repRlsDate}
+  )
+</insert>
+
+
+</mapper>

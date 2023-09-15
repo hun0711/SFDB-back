@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.contents.repository.MovieCommentDao">
+
+   <!-- 코멘트 가져오기 -->
+    <select id='getMovieComment' resultType="MovieCommentDto" parameterType="MovieCommentDto">
+    select *
+    from moviecomment
+    <where>
+<if test='movieId!=null'>
+and movieId = #{movieId}
+</if>
+  <if test='movieSeq!=null'> 
+    and movieSeq = #{movieSeq}
+    </if>
+</where>
+</select>
+
+   <!-- 해당영화 유저 코멘트 가져오기 -->
+    <select id='getUserMovieComment' resultType="MovieCommentDto" parameterType="MovieCommentDto">
+    select *
+    from moviecomment
+    <where>
+<if test='movieId!=null'>
+and movieId = #{movieId}
+</if>
+  <if test='movieSeq!=null'> 
+    and movieSeq = #{movieSeq}
+    </if>
+  <if test='userId!=null'> 
+    and userId = #{userId}
+    </if>
+</where>
+</select>
+
+<!-- 코멘트 등록하기 -->
+<insert id="insertMovieComment" parameterType="MovieCommentDto">
+  INSERT INTO moviecomment (movieId, movieSeq, commentDetail, spoilerStatus, userId, userName, userProfileImage)
+  VALUES (#{movieId}, #{movieSeq}, #{commentDetail}, #{spoilerStatus}, #{userId}, #{userName}, #{userProfileImage})
+</insert>
+
+
+<!-- 코멘트 수정하기 -->
+<update id='updateMovieComment' parameterType="MovieCommentDto">
+  UPDATE moviecomment
+  SET
+    commentDetail = #{commentDetail},
+    spoilerStatus = #{spoilerStatus}
+        <where>
+<if test='movieId!=null'>
+and movieId = #{movieId}
+</if>
+  <if test='movieSeq!=null'> 
+    and movieSeq = #{movieSeq}
+    </if>
+    <if test='userId!=null'>
+    and userId = #{userId}
+    </if>
+</where>
+</update>
+
+
+
+<!-- 코멘트 삭제하기  -->
+<delete id='deleteMovieComment' parameterType="MovieCommentDto">
+  DELETE FROM moviecomment
+  <where>
+    <if test='movieId!=null'>
+      AND movieId = #{movieId}
+    </if>
+    <if test='movieSeq!=null'> 
+      AND movieSeq = #{movieSeq}
+    </if>
+    <if test='userId!=null'>
+      AND userId = #{userId}
+    </if>
+  </where>
+</delete>
+
+
+</mapper>

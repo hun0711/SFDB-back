@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 이하 생략 -->
+     <style>
+        .mail-container {
+            background-color: #f3f3f3;
+            padding: 20px;
+        }
+        .mail-title {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+      }
+        .mail-content {
+            color: #555555;
+            margin-top: 30px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin:50px;" class="mail-container">
+        <h1 class="mail-title">비밀번호 찾기 결과</h1>
+        <p class="mail-content">
+            '<span th:text="${userName}"></span>' 님의 SFDB 아이디 '<span th:text="${userId}"></span>' 의 임시 비밀번호는 '<span th:text="${temporaryPassword}"></span>' 입니다.
+        </p>
+    </div>
+</body>
+</html>
